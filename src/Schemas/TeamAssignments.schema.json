@@ -1,0 +1,51 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Team Assignments Configuration",
+  "description": "Schema for configuring Dataverse Teams with Security Roles and Field Security Profiles",
+  "type": "object",
+  "required": ["teamAssignments"],
+  "properties": {
+    "teamAssignments": {
+      "type": "array",
+      "description": "List of team assignments with associated security roles and field security profiles",
+      "items": {
+        "type": "object",
+        "properties": {
+          "teamId": {
+            "type": "string",
+            "description": "The unique identifier (GUID) of the team",
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the team"
+          },
+          "securityRoleIds": {
+            "type": "array",
+            "description": "List of security role GUIDs to assign to the team",
+            "items": {
+              "type": "string",
+              "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+            },
+            "default": []
+          },
+          "fieldSecurityProfileIds": {
+            "type": "array",
+            "description": "List of field security profile GUIDs to assign to the team",
+            "items": {
+              "type": "string",
+              "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+            },
+            "default": []
+          }
+        },
+        "additionalProperties": false,
+        "oneOf": [
+          { "required": ["teamId"] },
+          { "required": ["name"] }
+        ]
+      }
+    }
+  },
+  "additionalProperties": false
+} 

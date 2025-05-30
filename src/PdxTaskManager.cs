@@ -31,10 +31,15 @@ namespace BeerLike.PDX
             // Manually register known task types from this assembly (BeerLike.PDX)
             // Key is the string that will be used in pdx_tasks.json (should match IPdxTask.TaskName)
             // Value is the Type of the class implementing IPdxTask.
-            
+
             var declareTeamsRolesTask = new DeclareTeamsRoles(_service, _packageLog); // Temp instance to get TaskName
             _registeredTaskTypes.Add(declareTeamsRolesTask.TaskName, typeof(DeclareTeamsRoles));
             _packageLog.Log($"PdxTaskManager: Registered task type '{declareTeamsRolesTask.TaskName}' -> {typeof(DeclareTeamsRoles).FullName}", TraceEventType.Verbose);
+
+            var declareTeamsColumnSecurityProfiles = new DeclareTeamsColumnSecurityProfiles(_service, _packageLog);
+            _registeredTaskTypes.Add(declareTeamsColumnSecurityProfiles.TaskName, typeof(DeclareTeamsColumnSecurityProfiles));
+            _packageLog.Log($"PdxTaskManager: Registered task type '{declareTeamsColumnSecurityProfiles.TaskName}' -> {typeof(DeclareTeamsColumnSecurityProfiles).FullName}", TraceEventType.Verbose);
+            
 
             // To add a new task:
             // 1. Create YourNewTask : IPdxTask in BeerLike.PDX.Tasks

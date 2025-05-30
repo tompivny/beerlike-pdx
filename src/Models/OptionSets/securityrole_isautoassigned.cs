@@ -9,20 +9,23 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-
-
-/// <summary>
-/// Value indicating whether security role is auto-assigned based on user license
-/// </summary>
-[System.Runtime.Serialization.DataContractAttribute()]
-[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
-public enum securityrole_isautoassigned
+namespace BeerLike.PDX.Models
 {
 	
-	[System.Runtime.Serialization.EnumMemberAttribute()]
-	No = 0,
 	
-	[System.Runtime.Serialization.EnumMemberAttribute()]
-	Yes = 1,
+	/// <summary>
+	/// Value indicating whether security role is auto-assigned based on user license
+	/// </summary>
+	[System.Runtime.Serialization.DataContractAttribute()]
+	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
+	public enum securityrole_isautoassigned
+	{
+		
+		[System.Runtime.Serialization.EnumMemberAttribute()]
+		No = 0,
+		
+		[System.Runtime.Serialization.EnumMemberAttribute()]
+		Yes = 1,
+	}
 }
 #pragma warning restore CS1591

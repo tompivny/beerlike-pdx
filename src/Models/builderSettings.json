@@ -1,0 +1,20 @@
+{
+    "suppressINotifyPattern": false,
+    "suppressGeneratedCodeAttribute": false,
+    "language": "CS",
+    "namespace": "BeerLike.PDX.Models",
+    "serviceContextName": "OrgContext",
+    "generateSdkMessages": true,
+    "generateGlobalOptionSets": false,
+    "emitFieldsClasses": true,
+    "entityTypesFolder": "Entities",
+    "messagesTypesFolder": "Messages",
+    "optionSetsTypesFolder": "OptionSets",
+    "entityNamesFilter": [
+        "team",
+        "role",
+        "fieldsecurityprofile"
+    ],
+    "emitEntityETC": false,
+    "emitVirtualAttributes": true
+  }

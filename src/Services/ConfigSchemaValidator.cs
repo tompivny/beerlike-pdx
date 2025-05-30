@@ -27,7 +27,7 @@ public class ConfigSchemaValidator : IConfigSchemaValidator
         }
         catch (Exception ex) // Catch parsing errors or other issues
         {
-            Console.WriteLine($"Error during JSON schema validation: {ex.Message}");
+            packageLog.Log($"Error during JSON schema validation: {ex.Message}", TraceEventType.Error);
             return false;
         }
     }

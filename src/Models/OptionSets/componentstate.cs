@@ -9,26 +9,29 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-
-
-/// <summary>
-/// The state of this component.
-/// </summary>
-[System.Runtime.Serialization.DataContractAttribute()]
-[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
-public enum componentstate
+namespace BeerLike.PDX.Models
 {
 	
-	[System.Runtime.Serialization.EnumMemberAttribute()]
-	Published = 0,
 	
-	[System.Runtime.Serialization.EnumMemberAttribute()]
-	Unpublished = 1,
-	
-	[System.Runtime.Serialization.EnumMemberAttribute()]
-	Deleted = 2,
-	
-	[System.Runtime.Serialization.EnumMemberAttribute()]
-	DeletedUnpublished = 3,
+	/// <summary>
+	/// The state of this component.
+	/// </summary>
+	[System.Runtime.Serialization.DataContractAttribute()]
+	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
+	public enum componentstate
+	{
+		
+		[System.Runtime.Serialization.EnumMemberAttribute()]
+		Published = 0,
+		
+		[System.Runtime.Serialization.EnumMemberAttribute()]
+		Unpublished = 1,
+		
+		[System.Runtime.Serialization.EnumMemberAttribute()]
+		Deleted = 2,
+		
+		[System.Runtime.Serialization.EnumMemberAttribute()]
+		DeletedUnpublished = 3,
+	}
 }
 #pragma warning restore CS1591

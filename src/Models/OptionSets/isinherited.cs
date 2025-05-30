@@ -9,20 +9,23 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-
-
-/// <summary>
-/// The role is inherited
-/// </summary>
-[System.Runtime.Serialization.DataContractAttribute()]
-[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
-public enum isinherited
+namespace BeerLike.PDX.Models
 {
 	
-	[System.Runtime.Serialization.EnumMemberAttribute()]
-	Teamprivilegesonly = 0,
 	
-	[System.Runtime.Serialization.EnumMemberAttribute()]
-	DirectUser_BasicaccesslevelandTeamprivileges = 1,
+	/// <summary>
+	/// The role is inherited
+	/// </summary>
+	[System.Runtime.Serialization.DataContractAttribute()]
+	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
+	public enum isinherited
+	{
+		
+		[System.Runtime.Serialization.EnumMemberAttribute()]
+		Teamprivilegesonly = 0,
+		
+		[System.Runtime.Serialization.EnumMemberAttribute()]
+		DirectUser_BasicaccesslevelandTeamprivileges = 1,
+	}
 }
 #pragma warning restore CS1591

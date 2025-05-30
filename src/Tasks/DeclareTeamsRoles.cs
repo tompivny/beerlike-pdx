@@ -7,8 +7,6 @@ using Microsoft.Xrm.Tooling.PackageDeployment.CrmPackageExtentionBase;
 using BeerLike.PDX.Services;
 using BeerLike.PDX.Models;
 
-[assembly: Microsoft.Xrm.Sdk.Client.ProxyTypesAssemblyAttribute()]
-
 namespace BeerLike.PDX.Tasks
 {
     public class DeclareTeamsRoles : IPdxTask
@@ -21,7 +19,7 @@ namespace BeerLike.PDX.Tasks
 
         public string TaskName => "DeclareTeamsRolesTask";
 
-        internal DeclareTeamsRoles(IOrganizationService service, TraceLogger packageLog)
+        public DeclareTeamsRoles(IOrganizationService service, TraceLogger packageLog)
             : this(service, packageLog, new ConfigSchemaValidator())
         {
         }

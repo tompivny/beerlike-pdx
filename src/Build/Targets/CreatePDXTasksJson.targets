@@ -1,0 +1,29 @@
+<Project>
+  <Target Name="CreatePDXTasksJson" BeforeTargets="BeforeBuild">
+    <Message Text="BeerLike.PDX: Checking for PDX.Tasks.json in $(BeerLikePDXTasksFile)..." Importance="normal" />
+    
+    <Copy SourceFiles="$(BeerLikePDXTemplateFile)" 
+          DestinationFiles="$(BeerLikePDXTasksFile)" 
+          Condition="!Exists('$(BeerLikePDXTasksFile)') AND Exists('$(BeerLikePDXTemplateFile)')" />
+    
+    <Message 
+      Text="BeerLike.PDX: ✅ Created PDX.Tasks.json in $(BeerLikePDXTasksFile). Please configure your tasks and commit this file to source control." 
+      Importance="high" 
+      Condition="!Exists('$(BeerLikePDXTasksFile)') AND Exists('$(BeerLikePDXTemplateFile)')" />
+    
+    <Message 
+      Text="BeerLike.PDX: ℹ️  PDX.Tasks.json already exists in $(BeerLikePDXTasksFile)." 
+      Importance="normal" 
+      Condition="Exists('$(BeerLikePDXTasksFile)')" />
+
+    <Error 
+      Text="BeerLike.PDX: ❌ Template file not found at $(BeerLikePDXTemplateFile). Package may not be properly installed." 
+      Condition="!Exists('$(BeerLikePDXTemplateFile)')" />
+  </Target>
+  <ItemGroup Condition="Exists('$(BeerLikePDXTasksFile)')">
+    <None Include="$(BeerLikePDXTasksFile)" Condition="'$(EnableDefaultNoneItems)' == 'true'">
+      <Visible>true</Visible>
+    </None>
+  </ItemGroup>
+
+</Project> 

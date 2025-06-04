@@ -1,28 +1,46 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net462</TargetFramework>
+    <TargetFrameworks>net462;net8.0</TargetFrameworks>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <LangVersion>11.0</LangVersion>
-    <VersionPrefix>0.0.1</VersionPrefix>
+    <VersionPrefix>0.0.4</VersionPrefix>
+    <!-- Package properties -->
+    <PackageId>BeerLike.PDX</PackageId>
+    <Title>BeerLike PDX</Title>
+    <Description>Package Deployer Extension library</Description>
+    <Authors>BeerLike</Authors>
     <!-- Ensures that content files are copied -->
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
   </PropertyGroup>
+  
   <ItemGroup>
-    <!-- Remove JsonSchema.Net -->
-    <!-- <PackageReference Include="JsonSchema.Net" Version="7.3.4" /> -->
-    
-    <!-- Add Newtonsoft.Json.Schema -->
     <PackageReference Include="Newtonsoft.Json.Schema" Version="3.0.15" /> 
     <PackageReference Include="Microsoft.PowerPlatform.Dataverse.Client" Version="1.2.3" />
     <PackageReference Include="Microsoft.CrmSdk.XrmTooling.PackageDeployment" Version="9.1.0.74" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.Build" Version="$(MicrosoftBuildVersion)" />
+    <PackageReference Include="Microsoft.Build.Tasks.Core" Version="$(MicrosoftBuildTasksCoreVersion)" />
   </ItemGroup>
 
-  <!-- Add this ItemGroup to include the schema file -->
+  <!-- Include schema files in the package -->
   <ItemGroup>
     <Content Include="Schemas\TeamAssignments.schema.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <PackagePath>contentFiles\any\any\Schemas\TeamAssignments.schema.json</PackagePath>
+      <Pack>true</Pack>
     </Content>
+  </ItemGroup>
+
+  <!-- Include MSBuild targets file in the package -->
+  <ItemGroup>
+    <None Include="Build\Targets\CreatePDXTasksJson.targets">
+      <Pack>true</Pack>
+      <PackagePath>build\BeerLike.PDX.targets</PackagePath>
+    </None>
+    <None Include="Templates\PDX.Tasks.json">
+      <Pack>true</Pack>
+      <PackagePath>Templates\PDX.Tasks.json</PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>

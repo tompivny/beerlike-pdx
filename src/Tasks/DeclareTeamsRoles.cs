@@ -13,22 +13,20 @@ namespace BeerLike.PDX.Tasks
     {
         private readonly IOrganizationService _service;
         private readonly TraceLogger _packageLog;
-        private readonly IConfigSchemaValidator _configValidator;
-        private const string DefaultSchemaFileName = "TeamAssignments.schema.json";
         private const string TeamRoleRelationshipName = "teamroles_association";
 
         public string TaskName => "DeclareTeamsRolesTask";
 
         public DeclareTeamsRoles(IOrganizationService service, TraceLogger packageLog)
-            : this(service, packageLog, new ConfigSchemaValidator())
         {
+            _service = service ?? throw new ArgumentNullException(nameof(service));
+            _packageLog = packageLog ?? throw new ArgumentNullException(nameof(packageLog));
         }
 
         internal DeclareTeamsRoles(IOrganizationService service, TraceLogger packageLog, IConfigSchemaValidator configValidator)
         {
             _service = service ?? throw new ArgumentNullException(nameof(service));
             _packageLog = packageLog ?? throw new ArgumentNullException(nameof(packageLog));
-            _configValidator = configValidator ?? throw new ArgumentNullException(nameof(configValidator));
         }
 
         public void Execute(string configFile, string packageAssetsFolder, string currentPackageLocation)
@@ -43,8 +41,6 @@ namespace BeerLike.PDX.Tasks
             _packageLog.Log($"{TaskName}: Full path to task-specific config file: {fullConfigPath}", TraceEventType.Verbose);
 
             string configJson;
-            string schemaJson;
-            string schemaFilePath;
             try
             {
                 if (!File.Exists(fullConfigPath))
@@ -56,20 +52,6 @@ namespace BeerLike.PDX.Tasks
 
                 var assemblyLocation = Assembly.GetExecutingAssembly().Location;
                 var assemblyDirectory = Path.GetDirectoryName(assemblyLocation);
-                if (string.IsNullOrEmpty(assemblyDirectory))
-                {
-                    _packageLog.Log($"{TaskName}: Could not determine assembly directory for schema.", TraceEventType.Error);
-                    throw new InvalidOperationException("Could not determine assembly directory for schema loading.");
-                }
-                schemaFilePath = Path.Combine(assemblyDirectory,"Schemas", DefaultSchemaFileName);
-
-                _packageLog.Log($"{TaskName}: Attempting to read schema file from: {schemaFilePath}", TraceEventType.Verbose);
-                if (!File.Exists(schemaFilePath))
-                {
-                    _packageLog.Log($"{TaskName}: Schema file not found at {schemaFilePath}. Aborting task.", TraceEventType.Error);
-                    throw new FileNotFoundException($"Schema file not found: {schemaFilePath}", schemaFilePath);
-                }
-                schemaJson = File.ReadAllText(schemaFilePath);
             }
             catch (Exception ex) when (ex is FileNotFoundException || ex is DirectoryNotFoundException)
             {
@@ -81,15 +63,6 @@ namespace BeerLike.PDX.Tasks
                 _packageLog.Log($"{TaskName}: Unexpected error reading task-specific configuration/schema: {ex.Message}", TraceEventType.Error, ex);
                 throw;
             }
-
-            var isValid = _configValidator.Validate(configJson, schemaJson, _packageLog);
-            if (!isValid)
-            {
-                var errorMessage = $"{TaskName}: Task-specific configuration file '{fullConfigPath}' failed schema validation against '{schemaFilePath}'. Check logs for details.";
-                _packageLog.Log(errorMessage, TraceEventType.Error);
-                throw new Exception(errorMessage);
-            }
-            _packageLog.Log($"{TaskName}: Task-specific configuration file validated successfully.", TraceEventType.Information);
             UpsertTeamsRoles(fullConfigPath, configJson);
         }
 

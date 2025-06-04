@@ -1,0 +1,5 @@
+<Project>
+    <Target Name="ValidatePDXTasksJson" BeforeTargets="BeforeBuild">
+        <ValidateJsonFile JsonFile="$(BeerLikePDXTasksFile)" SchemaFile="$(BeerLikePDXSchemaFile)" />
+    </Target>
+</Project>

@@ -1,0 +1,10 @@
+{
+    "tasks": [
+        {
+            "name": "CreatePDXTasksJson",
+            "description": "Create PDX.Tasks.json",
+            "command": "dotnet",
+            "args": ["build", "Build/Targets/CreatePDXTasksJson.targets"]
+        }
+    ]
+}

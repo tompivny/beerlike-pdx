@@ -1,0 +1,6 @@
+<Project>
+    <PropertyGroup>
+        <BeerLikePDXTasksFile>$(MSBuildProjectDirectory)\PDX.Tasks.json</BeerLikePDXTasksFile>
+        <BeerLikePDXSchemaFile>$(MSBuildProjectDirectory)\Schemas\TeamAssignments.schema.json</BeerLikePDXSchemaFile>
+    </PropertyGroup>
+</Project>
